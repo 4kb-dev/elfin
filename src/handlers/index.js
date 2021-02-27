@@ -1,3 +1,4 @@
 import * as notAllowed from './notAllowed'
+import * as redirect from './redirect'
 
-export default [notAllowed]
+export default [redirect, notAllowed]

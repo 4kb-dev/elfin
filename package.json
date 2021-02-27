@@ -14,7 +14,9 @@
   "author": "eMAD <emad.alam@yahoo.com>",
   "license": "MIT",
   "dependencies": {
-    "nanoid": "^3.1.20"
+    "lodash": "^4.17.21",
+    "nanoid": "^3.1.20",
+    "valid-url": "^1.0.9"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^2.1.0",
