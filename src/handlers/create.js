@@ -1,30 +1,30 @@
 import validUrl from 'valid-url'
 import first from 'lodash/first'
 
-import {getPathsFromRequest, storage, http} from 'utils'
+import {getKeyFromRequest, getPathsFromRequest, http, storage} from 'utils'
 
 /**
- * Handler for redirecting requests.
+ * Handler for creating shortened url.
+ *
+ * @TODO: add rate limiting and/or abuse blocking
  *
  * @param {Request} request The incoming HTTP request
  * @returns {Promise<Response>} The HTTP response object
  */
 export async function handler(request) {
-  const urlKey = first(getPathsFromRequest(request))
-
-  if (!urlKey) {
-    return http.badRequest('Invalid key!')
-  }
-
-  const url = await storage.getValue(urlKey)
-
-  // @TODO:
-  // add better 404 page
+  const url = await getKeyFromRequest(request, 'url')
   if (!url || !validUrl.isWebUri(url)) {
-    return http.notFound('Page not found!')
+    return http.badRequest('A valid `url` param is required!')
   }
 
-  return Response.redirect(url, 301)
+  const key = await storage.setValue(url)
+
+  return new Response(JSON.stringify({key}), {
+    status: 200,
+    headers: {
+      'content-type': 'application/json;charset=UTF-8',
+    },
+  })
 }
 
 /**
@@ -37,5 +37,7 @@ export async function handler(request) {
 export function canHandle(request) {
   const requestMethod = request.method
   const paths = getPathsFromRequest(request)
-  return requestMethod === 'GET' && paths.length === 1
+  return (
+    requestMethod === 'POST' && paths.length === 1 && first(paths) === 'create'
+  )
 }

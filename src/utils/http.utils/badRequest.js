@@ -2,7 +2,7 @@
  * Returns the HTTP 400 Bad Request response object,
  * with a provided optional message.
  *
- * @param {String} [message=null] Optional message
+ * @param {string} [message=null] Optional message
  * @returns {Response} The HTTP response
  */
 export default function badRequest(message = null) {

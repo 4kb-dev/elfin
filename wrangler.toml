@@ -14,7 +14,7 @@ zone_id = "44ec966c57e026e3a58051647fc209fb"
 webpack_config = "webpack.production.js"
 vars = { DEPLOYMENT_ENV = "staging" }
 kv_namespaces = [
-  { binding = "KV", id = "2eeb394600674bc19959193666ab42bf" }
+  { binding = "KV", id = "2eeb394600674bc19959193666ab42bf", preview_id = "2eeb394600674bc19959193666ab42bf" }
 ]
 
 [env.production]
