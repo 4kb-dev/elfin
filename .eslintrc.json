@@ -1,0 +1,14 @@
+{
+  "extends": "@partumgmbh",
+  "globals": {
+    "atob": "readonly",
+    "btoa": "readonly",
+    "fetch": "readonly",
+    "caches": "readonly",
+    "HTMLRewriter": "readonly",
+    "addEventListener": "readonly",
+    "Response": "readonly",
+    "Request": "readonly",
+    "crypto": "readonly"
+  }
+}

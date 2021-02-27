@@ -1,0 +1,21 @@
+type = "webpack"
+name = "elfin-dev"
+account_id = "85a1886b20d823a15307b056606fceea"
+workers_dev = true
+webpack_config = "webpack.development.js"
+vars = { DEPLOYMENT_ENV = "dev" }
+kv_namespaces = [
+  { binding = "KV", id = "8d8d125804bd46e9ac683e9dbdc56e5c", preview_id = "2eeb394600674bc19959193666ab42bf" }
+]
+
+[env.staging]
+name = "elfin-stage"
+zone_id = "44ec966c57e026e3a58051647fc209fb"
+webpack_config = "webpack.production.js"
+vars = { DEPLOYMENT_ENV = "staging" }
+
+[env.production]
+name = "elfin"
+zone_id = "44ec966c57e026e3a58051647fc209fb"
+webpack_config = "webpack.production.js"
+vars = { DEPLOYMENT_ENV = "production" }

@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "target": "ES2020",
+    "module": "CommonJS",
+    "lib": ["ES2020", "WebWorker"],
+    "checkJs": true,
+    "types": ["@cloudflare/workers-types"]
+  }
+}
