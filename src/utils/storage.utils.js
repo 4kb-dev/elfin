@@ -21,14 +21,25 @@ export function getValue(key) {
 }
 
 /**
+ * Method to fetch a value along with its metadata info from the KV store.
+ *
+ * @param {string} key Key to fetch value from the KV store.
+ * @returns {Promise<KVWithMetadata>} Promise that resolves with the stored value & metadata
+ */
+export function getValueWithMetadata(key) {
+  return KV.getWithMetadata(key)
+}
+
+/**
  * Method to store a value in the KV store.
  *
  * @param {string} value Value to store
+ * @param {any} [metadata] Any metadata info to store
  * @returns {Promise<string>} Promise that resolves with the key of the stored value
  */
-export async function setValue(value) {
+export async function setValue(value, metadata) {
   const key = await getUniqueKey()
-  await KV.put(key, value)
+  await KV.put(key, value, {metadata})
   return key
 }
 
@@ -45,3 +56,9 @@ export async function getUniqueKey() {
   }
   return key
 }
+
+/**
+ * @typedef {object} KVWithMetadata The value along with its metadata info
+ * @property {string | null} value The value
+ * @property {any} metadata The metadata information
+ */

@@ -1,4 +1,4 @@
-import {badRequest} from 'utils/http.utils'
+import {http} from 'utils'
 import handlers from './handlers'
 
 /**
@@ -12,7 +12,7 @@ export default function handleRequest(request) {
   const toExecute = handlers.find(({canHandle}) => canHandle(request))
 
   if (!toExecute) {
-    return badRequest('Invalid Configurations!')
+    return http.badRequest('Invalid Configurations!')
   }
 
   return toExecute.handler(request)

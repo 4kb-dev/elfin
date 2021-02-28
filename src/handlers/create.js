@@ -1,7 +1,7 @@
 import validUrl from 'valid-url'
 import first from 'lodash/first'
 
-import {getKeyFromRequest, getPathsFromRequest, http, storage} from 'utils'
+import {getValuesFromRequest, getPathsFromRequest, http, storage} from 'utils'
 
 /**
  * Handler for creating shortened url.
@@ -12,12 +12,15 @@ import {getKeyFromRequest, getPathsFromRequest, http, storage} from 'utils'
  * @returns {Promise<Response>} The HTTP response object
  */
 export async function handler(request) {
-  const url = await getKeyFromRequest(request, 'url')
+  const {url, email = null} = await getValuesFromRequest(request, [
+    'url',
+    'email',
+  ])
   if (!url || !validUrl.isWebUri(url)) {
     return http.badRequest('A valid `url` param is required!')
   }
 
-  const key = await storage.setValue(url)
+  const key = await storage.setValue(url, {email})
 
   return new Response(JSON.stringify({key}), {
     status: 200,
