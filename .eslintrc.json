@@ -10,6 +10,7 @@
     "Response": "readonly",
     "Request": "readonly",
     "crypto": "readonly",
-    "KV": "readonly"
+    "KV": "readonly",
+    "DEPLOYMENT_URL": "readonly"
   }
 }

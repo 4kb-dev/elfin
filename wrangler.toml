@@ -3,7 +3,7 @@ name = "elfin-dev"
 account_id = "85a1886b20d823a15307b056606fceea"
 workers_dev = true
 webpack_config = "webpack.development.js"
-vars = { DEPLOYMENT_ENV = "dev" }
+vars = { DEPLOYMENT_ENV = "dev", DEPLOYMENT_URL = "https://stage.weg.one" }
 kv_namespaces = [
   { binding = "KV", id = "8d8d125804bd46e9ac683e9dbdc56e5c", preview_id = "2eeb394600674bc19959193666ab42bf" }
 ]
@@ -12,7 +12,7 @@ kv_namespaces = [
 name = "elfin-stage"
 zone_id = "44ec966c57e026e3a58051647fc209fb"
 webpack_config = "webpack.production.js"
-vars = { DEPLOYMENT_ENV = "staging" }
+vars = { DEPLOYMENT_ENV = "staging", DEPLOYMENT_URL = "https://stage.weg.one" }
 kv_namespaces = [
   { binding = "KV", id = "2eeb394600674bc19959193666ab42bf", preview_id = "2eeb394600674bc19959193666ab42bf" }
 ]
@@ -21,7 +21,7 @@ kv_namespaces = [
 name = "elfin"
 zone_id = "44ec966c57e026e3a58051647fc209fb"
 webpack_config = "webpack.production.js"
-vars = { DEPLOYMENT_ENV = "production" }
+vars = { DEPLOYMENT_ENV = "production", DEPLOYMENT_URL = "https://weg.one" }
 kv_namespaces = [
   { binding = "KV", id = "8d8d125804bd46e9ac683e9dbdc56e5c" }
 ]

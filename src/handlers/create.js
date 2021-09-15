@@ -1,7 +1,14 @@
 import validUrl from 'valid-url'
 import first from 'lodash/first'
+import isPlainObject from 'lodash/isPlainObject'
 
-import {getValuesFromRequest, getPathsFromRequest, http, storage} from 'utils'
+import {
+  getValuesFromRequest,
+  getPathsFromRequest,
+  http,
+  storage,
+  url as urlUtils,
+} from 'utils'
 
 /**
  * Handler for creating shortened url.
@@ -12,17 +19,24 @@ import {getValuesFromRequest, getPathsFromRequest, http, storage} from 'utils'
  * @returns {Promise<Response>} The HTTP response object
  */
 export async function handler(request) {
-  const {url, email = null} = await getValuesFromRequest(request, [
+  const {url, metadata = null} = await getValuesFromRequest(request, [
     'url',
-    'email',
+    'metadata',
   ])
+
   if (!url || !validUrl.isWebUri(url)) {
     return http.badRequest('A valid `url` param is required!')
   }
 
-  const key = await storage.setValue(url, {email})
+  if (metadata && !isPlainObject(metadata)) {
+    return http.badRequest('`metadata` must be a plain object!')
+  }
 
-  return new Response(JSON.stringify({key}), {
+  const key = await storage.setValue(url, metadata)
+  const shortUrl = urlUtils.RedirectURL(key)
+  const response = JSON.stringify({key, shortUrl})
+
+  return new Response(response, {
     status: 200,
     headers: {
       'content-type': 'application/json;charset=UTF-8',
